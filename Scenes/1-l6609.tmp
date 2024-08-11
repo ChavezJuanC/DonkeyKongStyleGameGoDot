@@ -1,0 +1,165 @@
+[gd_scene load_steps=12 format=3 uid="uid://c17pf4jr165bb"]
+
+[ext_resource type="PackedScene" uid="uid://yx60kpx7sdfk" path="res://Scenes/player.tscn" id="1_3qsqe"]
+[ext_resource type="PackedScene" uid="uid://dlxgnbq26ud1l" path="res://Scenes/top_platform.tscn" id="2_1wcc3"]
+[ext_resource type="Script" path="res://Scenes/PlayerCamera.gd" id="2_dyukv"]
+[ext_resource type="PackedScene" uid="uid://b26fnogvgt660" path="res://Scenes/barrel.tscn" id="3_adbf1"]
+[ext_resource type="PackedScene" uid="uid://xsmoqkn32g87" path="res://Scenes/ground.tscn" id="4_abxns"]
+[ext_resource type="PackedScene" uid="uid://bd5iyu7elclrb" path="res://Scenes/boss.tscn" id="5_xu8gj"]
+[ext_resource type="Texture2D" uid="uid://c3tmuj4nogryu" path="res://Assets/Env/tile_flag.png" id="7_2jlcl"]
+[ext_resource type="Texture2D" uid="uid://cp24r1bcgmswm" path="res://Assets/Env/background_cloudA.png" id="8_5fn1r"]
+[ext_resource type="Texture2D" uid="uid://hr3sjd5mwkbs" path="res://Assets/Env/character_roundYellow.png" id="9_sd5a1"]
+[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="10_8q2g7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7tuf"]
+size = Vector2(60.5, 87.1071)
+
+[node name="Level1" type="Node2D"]
+scale = Vector2(1.00129, 1.02686)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("obj_to_follow")]
+position = Vector2(1104, 544)
+scale = Vector2(0.668381, 1.04458)
+limit_left = 0
+limit_top = -400
+limit_right = 1152
+limit_bottom = 690
+script = ExtResource("2_dyukv")
+obj_to_follow = NodePath("../Chars/Player")
+
+[node name="Chars" type="Node" parent="."]
+
+[node name="Player" parent="Chars" instance=ExtResource("1_3qsqe")]
+z_as_relative = false
+position = Vector2(1104, 543)
+
+[node name="Boss" parent="Chars" instance=ExtResource("5_xu8gj")]
+position = Vector2(-121, -437)
+rotation = 0.0575959
+
+[node name="Plats" type="Node" parent="."]
+
+[node name="topPlatform" parent="Plats" instance=ExtResource("2_1wcc3")]
+position = Vector2(160, 407)
+rotation = -0.0575959
+scale = Vector2(1.70018, 1.6507)
+
+[node name="topPlatform4" parent="Plats" instance=ExtResource("2_1wcc3")]
+position = Vector2(161, 110)
+rotation = -0.0575959
+scale = Vector2(1.7, 1.7)
+
+[node name="topPlatform2" parent="Plats" instance=ExtResource("2_1wcc3")]
+position = Vector2(-11, 495)
+rotation = 0.0575959
+scale = Vector2(1.7, 1.7)
+
+[node name="topPlatform3" parent="Plats" instance=ExtResource("2_1wcc3")]
+position = Vector2(-13, 199)
+rotation = 0.0575959
+scale = Vector2(1.7, 1.7)
+
+[node name="topPlatform5" parent="Plats" instance=ExtResource("2_1wcc3")]
+position = Vector2(-12, -94)
+rotation = 0.0575959
+scale = Vector2(1.7, 1.7)
+
+[node name="Barrels" type="Node" parent="."]
+
+[node name="Barrel" parent="Barrels" instance=ExtResource("3_adbf1")]
+z_as_relative = false
+position = Vector2(1071, 317)
+scale = Vector2(1.00128, 0.973723)
+
+[node name="Barrel2" parent="Barrels" instance=ExtResource("3_adbf1")]
+z_as_relative = false
+position = Vector2(83, 178)
+
+[node name="Barrel3" parent="Barrels" instance=ExtResource("3_adbf1")]
+z_as_relative = false
+position = Vector2(776, -87)
+
+[node name="Env" type="Node" parent="."]
+
+[node name="Ground" parent="Env" instance=ExtResource("4_abxns")]
+position = Vector2(-15, 565)
+
+[node name="Flag" type="Sprite2D" parent="Env"]
+position = Vector2(413, -132)
+scale = Vector2(2, 2)
+texture = ExtResource("7_2jlcl")
+
+[node name="Area2D" type="Area2D" parent="Env/Flag"]
+scale = Vector2(0.459959, 1.01025)
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Env/Flag/Area2D"]
+position = Vector2(-47.8302, -38.6043)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_d7tuf")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="TextureRect" type="TextureRect" parent="UI/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -131.0
+offset_top = 6.0
+offset_right = -3.0
+offset_bottom = 70.0
+grow_horizontal = 0
+texture = ExtResource("8_5fn1r")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.5
+offset_top = -55.0
+offset_right = 11.5
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.975147, 1.00342)
+theme_override_colors/font_color = Color(0.216373, 0.446277, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+
+[node name="BoxContainer" type="BoxContainer" parent="UI/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_top = 78.0
+offset_right = 29.0
+offset_bottom = 142.0
+grow_horizontal = 0
+scale = Vector2(0.728688, 0.621476)
+theme_override_constants/separation = -20
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/CanvasLayer/BoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_sd5a1")
+
+[node name="TextureRect2" type="TextureRect" parent="UI/CanvasLayer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("9_sd5a1")
+
+[node name="TextureRect3" type="TextureRect" parent="UI/CanvasLayer/BoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_sd5a1")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("10_8q2g7")
+
+[connection signal="player_hit" from="Chars/Player" to="GameManager" method="_on_player_player_hit"]
+[connection signal="body_entered" from="Env/Flag/Area2D" to="Chars/Player" method="_on_area_2d_body_entered"]

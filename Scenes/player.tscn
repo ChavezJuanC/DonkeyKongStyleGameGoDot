@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://yx60kpx7sdfk"]
+
+[ext_resource type="Texture2D" uid="uid://s0dypr7oev0w" path="res://Assets/Character/yellow-pill.png" id="1_3o5um"]
+[ext_resource type="Script" path="res://Scenes/playerHandler.gd" id="1_q70qj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hu7k"]
+radius = 9.90641
+height = 29.2278
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("playerSprite")]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_q70qj")
+jumpSpeed = 350
+movementSpeed = 200
+playerSprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3o5um")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(2.01889, 2.12127)
+shape = SubResource("CapsuleShape2D_0hu7k")
